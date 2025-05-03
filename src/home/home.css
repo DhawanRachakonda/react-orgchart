@@ -15,3 +15,115 @@
   margin-top: 2rem;
   margin-right: 2rem;
 }
+
+.org-chart {
+  background: white;
+  padding: 20px;
+  overflow-x: auto;
+  min-height: 100vh;
+}
+
+.org-chart ul {
+  padding-left: 0;
+  width: 6em;
+  position: relative;
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+}
+
+.org-chart li {
+  list-style-type: none;
+  position: relative;
+  margin-left: 17.1em;
+  padding-bottom: 6em;
+  padding-top: 0em;
+}
+
+.org-chart li.first::before {
+  left: -1.5rem;
+  width: 1.5em;
+  border-radius: unset;
+}
+
+.org-chart li::before {
+  content: '';
+  position: absolute;
+  top: 1.4em;
+  left: -1rem;
+  border-bottom: 2px solid #000;
+  border-bottom-left-radius: 8px;
+  height: 1em;
+  width: 1em;
+}
+
+.org-chart li::after {
+  content: '';
+  position: absolute;
+  top: 2.47em;
+  left: -1rem;
+  border-left: 2px solid #000;
+  width: 0;
+  height: 100%;
+}
+
+.org-chart li.card.first::after {
+  border-right: 2px solid #000;
+  border-left: 0;
+  border-top-right-radius: 65%;
+  height: 98%;
+  top: 2.64em;
+}
+
+.org-chart ul.one-child > li:last-child::before {
+  left: -2.3rem;
+  width: 2.4em;
+  border-radius: unset;
+}
+
+.org-chart li:last-child::before {
+  border-bottom-left-radius: 8px;
+  top: 1.56em;
+}
+
+.org-chart li:last-child::after {
+  height: 0% !important;
+}
+
+.org-chart li:nth-last-child(-n+2)::after {
+  height: 99.2%;
+  border-bottom-left-radius: 25%;
+}
+
+.org-chart li:nth-last-child(-n+1)::after {
+  height: 98.5%;
+  border-bottom-left-radius: 18%;
+}
+
+.org-chart ul:last-child {
+  margin-top: -1.325em;
+}
+
+.org-chart ul:last-child:first-child {
+  margin-top: 0em;
+}
+
+.org-chart .box {
+  border: 2px solid #000;
+  position: absolute;
+  width: 14em;
+  height: 4em;
+  padding: 5px;
+}
+
+.box.has-child::after {
+  content: '';
+  position: absolute;
+  right: -1.4em;
+  top: 2.3em;
+  width: 1.4em;
+  height: 1em;
+  border-top: 2px solid #000;
+  border-bottom: 0;
+  border-top-right-radius: 0.38em;
+}

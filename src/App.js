@@ -13,19 +13,7 @@ import "./App.css";
 const App = () => {
   return (
     <Router>
-      <div className="wrapper">
-        <nav>
-          <NavLink to="/" exact activeClassName="selected">Home</NavLink>
-          <NavLink to="/default-chart" activeClassName="selected">Deault Chart</NavLink>
-          <NavLink to="/pan-zoom-chart" activeClassName="selected">Pan & Zoom Chart</NavLink>
-          <NavLink to="/custom-node-chart" activeClassName="selected">Custom Node Chart</NavLink>
-          <NavLink to="/export-chart" activeClassName="selected">Export Chart</NavLink>
-          <NavLink to="/drag-drop-chart" activeClassName="selected">Drap & Drop Chart</NavLink>
-          <NavLink to="/edit-chart" activeClassName="selected">Edit Chart</NavLink>
-          <NavLink to="/edit-node" activeClassName="selected">Edit Node</NavLink>
-        </nav>
-
-        <Route exact path="/" component={Home} />
+      <Route exact path="/" component={Home} />
         <Route path="/default-chart" component={DefaultChart} />
         <Route path="/pan-zoom-chart" component={PanZoomChart} />
         <Route path="/custom-node-chart" component={CustomNodeChart} />
@@ -33,7 +21,6 @@ const App = () => {
         <Route path="/drag-drop-chart" component={DragDropChart} />
         <Route path="/edit-chart" component={EditChart} />
         <Route path="/edit-node" component={EditNode} />
-      </div>
     </Router>
   );
 };
