@@ -56,8 +56,10 @@ const Card = (props) => {
   const conatainsMoreThanOneChild = data.children ? data.children.length > 1 : false;
   return (
     <ul key={data.id} className={ (!data.children || data.children.length === 0) ? " last" : conatainsOneChild ? "one-child" : ''}>
-      <div className={`box ${conatainsMoreThanOneChild ? 'has-child' : ''}`}>{data.name}</div>
-      {/* {data.name} */}
+      <div className={`box ${conatainsMoreThanOneChild ? 'has-child' : ''}`}>
+        {data.name}
+        <p>This is box with width and height, you can place any ui elemnts in it.</p>
+      </div>
       {data.children && data.children.length > 0 && data.children.map((item, index) => (
         <>
           <li className={index + 1 === data.children.length ? "card last" : index === 0 ? "card first" : "card"} key={item.id}>
@@ -118,28 +120,10 @@ const EmployeeChart = (props) => {
       }
     ]
   };
-  const width = 2;
-  const height = 10;
-  const radius = 2;
 
   return (
     <div className="org-chart">
       Employee Chart
-
-<span style={{width: "200px", height: "300px", display: "inlineBlock"}}>
-<svg
-  width={width}
-  height={height}
-  viewBox={`0 0 ${width} ${height}`}
-  fill="none"
-  {...props}
->
-  <path
-    d={`M0 0H${width - radius}C${width} 0, ${width} ${radius}, ${width} ${radius}V${height}H0V0Z`}
-    fill="currentColor" 
-  />
-</svg>
-</span>
       <br/> <br/>
       <Card data={data} />
     </div>
