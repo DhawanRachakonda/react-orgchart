@@ -118,10 +118,29 @@ const EmployeeChart = (props) => {
       }
     ]
   };
+  const width = 2;
+  const height = 10;
+  const radius = 2;
 
   return (
     <div className="org-chart">
       Employee Chart
+
+<span style={{width: "200px", height: "300px", display: "inlineBlock"}}>
+<svg
+  width={width}
+  height={height}
+  viewBox={`0 0 ${width} ${height}`}
+  fill="none"
+  {...props}
+>
+  <path
+    d={`M0 0H${width - radius}C${width} 0, ${width} ${radius}, ${width} ${radius}V${height}H0V0Z`}
+    fill="currentColor" 
+  />
+</svg>
+</span>
+      <br/> <br/>
       <Card data={data} />
     </div>
   );
