@@ -52,7 +52,7 @@
 
 .org-chart li.first::before {
   top: 4em; /* Increase or decrease whenever gap or height in increased or decreased. This is responsible for displaying top curve that connectes a straight line. */
-  left: -1.35rem;
+  left: -1.3rem;
   width: 0.68em;
   height: 0.6em;
   border-radius: unset;
@@ -70,8 +70,8 @@
   height: 0.78em;
   background-color: #000;
   border-bottom-left-radius: 1em;
-  -webkit-mask-image: radial-gradient(circle at top right, transparent 65%, black 20%);
-  mask-image: radial-gradient(circle at top right, transparent 62%, black 20%);
+  -webkit-mask-image: radial-gradient(circle at top right, transparent 60%, black 20%);
+  mask-image: radial-gradient(circle at top right, transparent 60%, black 20%);
 }
 
 .org-chart li::after {
@@ -79,16 +79,16 @@
   position: absolute;
   top: 3.3em; /* bottom of staright line. This has to be adjusted when height of box or gap is increased or decreased.*/
   left: -0.8rem;
-  border-left: 2px solid #000;
+  border-left: 2.7px solid #000;
   width: 0;
   height: 100%;
 }
 
 .org-chart li.card.first::after {
-  border-right: 2px solid #000;
+  border-right: 3px solid #000;
   border-left: 0;
-  height: 87%; /* Adjest this as well. It can lead to errors in UI when there are only two boxes or nodes that are connected to one straight line.*/
-  top: 4.6em;/* top of staright line. This has to be adjusted when height of box or gap is increased or decreased.*/
+  height: 88%; /* Adjest this as well. It can lead to errors in UI when there are only two boxes or nodes that are connected to one straight line.*/
+  top: 4.5em;/* top of staright line. This has to be adjusted when height of box or gap is increased or decreased.*/
 }
 
 .org-chart ul.one-child > li:last-child::before {
