@@ -1,7 +1,6 @@
 {
   "name": "@dabeng/react-orgchart",
   "version": "1.0.3",
-  "main": "./dist/ChartContainer.js",
   "files": [
     "dist",
     "README.md"
@@ -22,10 +21,6 @@
   ],
   "author": "dabeng <dabeng413@gmail.com>",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/dabeng/react-orgchart/issues"
-  },
-  "homepage": "https://github.com/dabeng/react-orgchart#readme",
   "babel": {
     "presets": [
       "@babel/preset-env",
