@@ -41,12 +41,11 @@
 .list-view li {
   position: absolute;
   top: 0;
-  margin-left: 19.4em;
+  margin-left: 20.4em;
 }
 
 .org-chart ul {
   padding-left: 0;
-  width: 6em;
   position: relative;
   transition: all 0.5s;
   -webkit-transition: all 0.5s;
@@ -56,70 +55,86 @@
 .org-chart li {
   list-style-type: none;
   position: relative;
-  margin-left: 19.4em; /* To increase gap between each ul. Whenever you increase width of box, this has to be increased. */
+  margin-left: 20.4em; /* To increase gap between each ul. Whenever you increase width of box, this has to be increased. */
   padding-bottom: 9.5em; /* To increase margin between nodex */
 }
 
-.org-chart li.first::before {
-  top: 4em; /* Increase or decrease whenever gap or height in increased or decreased. This is responsible for displaying top curve that connectes a straight line. */
-  left: -1.3rem;
-  width: 0.68em;
-  height: 0.6em;
-  border-radius: unset;
-  border-top-right-radius: 1em;
-  -webkit-mask-image: radial-gradient(circle at bottom left, transparent 57%, black 20%);
-  mask-image: radial-gradient(circle at bottom left, transparent 57%, black 20%);
-}
-
-.org-chart li::before {
+.org-chart li.card::before {
   content: '';
-  position: absolute;
-  top: 3.3em; /* Increase or decrease whenever gap or height in increased or decreased. This is responsible for displaying curve that connectes a straight line. */
-  left: -0.8rem;
-  width: 0.85em;
-  height: 0.78em;
-  background-color: #000;
-  border-bottom-left-radius: 1em;
-  -webkit-mask-image: radial-gradient(circle at top right, transparent 60%, black 20%);
-  mask-image: radial-gradient(circle at top right, transparent 60%, black 20%);
-}
-
-.org-chart li::after {
-  content: '';
-  position: absolute;
-  top: 3.3em; /* bottom of staright line. This has to be adjusted when height of box or gap is increased or decreased.*/
-  left: -0.8rem;
-  border-left: 2.7px solid #000;
-  width: 0;
+  border-left: 2px solid #000;
   height: 100%;
+  position: absolute;
+  top: 4.2em;
+  left: -1.25em;
 }
 
-.org-chart li.card.first::after {
-  border-right: 3px solid #000;
-  border-left: 0;
-  height: 88%; /* Adjest this as well. It can lead to errors in UI when there are only two boxes or nodes that are connected to one straight line.*/
-  top: 4.5em;/* top of staright line. This has to be adjusted when height of box or gap is increased or decreased.*/
+.org-chart li.card.first::before {
+  top: 45%;
 }
 
-.org-chart ul.one-child > li:last-child::before {
-  left: -1.6rem;
-  width: 1.6em;
+.org-chart li.card.last::before {
+  content: '';
+  border-left: none;
+  height: 100%;
+  position: absolute;
+}
+
+.org-chart div.box.box-0::before {
+  width: 7.5%;/* Increase or decrease whenever gap or height in increased or decreased. This is responsible for displaying curve that connectes a straight line. */
+  left: -7.5%;
+  border: none;
+}
+
+.org-chart div.box::before {
+  content: '';
+  position: absolute;
+  width: 6.4%;
+  /* Increase or decrease whenever gap or height in increased or decreased. This is responsible for displaying curve that connectes a straight line. */
+  top: 50%;
+  height: 8%;
+  /* Increase length of circle */
+  left: -7.8%;
+  border: 2px solid black;
+  border-top: none;
+  border-radius: 0 0 100% 100%;
+}
+
+/* no before style for root node */
+.org-chart > ul > div.box::before {
+  content: unset;
+  width: unset;
+  border: none;
+  border-top: none;
   border-radius: unset;
+}
+
+/* from left to right first left nodes after root node */
+.org-chart > ul > li > ul > div.box::before {
+  left: -8%;
+}
+
+.org-chart .box-0 > .top-right-circle::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -9.6%;
+  width: 2%;
+  height: 5%;
+  border-right: 2px solid black;
+  border-top: 2px solid black;
+  border-radius: 0 100% 0px 0;
+}
+
+.org-chart div.box-0::before, .org-chart div.box.box-nocircle::before {
+  width: 0em;
+}
+
+.org-chart div.box.box-0::before {
+  width: 15%;
+  border-top: 2px solid #000;
   mask-image: none;
-  border-bottom: 2px solid #000;
-  height: unset;
-}
-
-.org-chart li:last-child::after {
-  height: 0% !important;
-}
-
-.org-chart li:nth-last-child(-n+2)::after {
-  height: 100%;
-}
-
-.org-chart ul:last-child:first-child {
-  margin-top: 0em;
+  background-color: unset;
+  left: -15.5%;
 }
 
 .org-chart .box {
@@ -130,16 +145,6 @@
   padding: 5px;
 }
 
-.box.has-child::after {
-  content: '';
-  position: absolute;
-  right: -1.8em;
-  top: 3.9em;  /* Increase or decrease whenever gap or height in increased or decreased. This is responsible for displaying top hifen that connectes a straight line. */
-  width: 1.7em;
-  height: 1em;
-  border-top: 2px solid #000;
-  border-bottom: 0;
-}
 
 .box p {
   margin: unset;
