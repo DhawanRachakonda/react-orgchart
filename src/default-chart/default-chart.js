@@ -68,11 +68,13 @@ function LevelInitializer({noOfLevels}) {
       for (let i = 1; i <= noOfLevels; i++) {
         if (i === 1) {
           level = {level: i, children: []};
+          nextLevel = level;
         } else {
           const newLevel = {level: i, children: []};
           nextLevel.children.push(newLevel);
+          nextLevel = newLevel;
         }
-        nextLevel = level;
+        
       }
       setLevels(level);
     }
