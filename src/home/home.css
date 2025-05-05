@@ -23,15 +23,25 @@
   min-height: 100vh;
 }
 
+.list-view {
+  margin-top: 3em;
+  position: relative;
+}
+
 .list-view ul {
-  list-style-type: none;
-  padding: 0;
-  padding-left: 1em;
+  list-style: none;
+  padding: unset;
+  margin: unset;
+}
+
+.list-view ul.first-level {
+  margin-left: 1.2em;
 }
 
 .list-view li {
-  display: inline-block;
-  width: 19.5em;
+  position: absolute;
+  top: 0;
+  margin-left: 19.4em;
 }
 
 .org-chart ul {
