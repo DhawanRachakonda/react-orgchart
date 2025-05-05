@@ -1,57 +1,9 @@
 import React, { useEffect, useState } from "react";
-import OrganizationChart from "../components/ChartContainer";
+
 import initialize from "./OrgModel";
 
 const data = initialize();
 let update;
-
-const DefaultChart = () => {
-  const ds = {
-    id: "n1",
-    name: "Lao Lao",
-    title: "general manager",
-    children: [
-      { id: "n2", name: "Bo Miao", title: "department manager" },
-      {
-        id: "n3",
-        name: "Su Miao",
-        title: "department manager",
-        children: [
-          { id: "n4", name: "Tie Hua", title: "senior engineer" },
-          {
-            id: "n5",
-            name: "Hei Hei",
-            title: "senior engineer",
-            children: [
-              { id: "n6", name: "Dan Dan", title: "engineer" },
-              { id: "n7", name: "Xiang Xiang", title: "engineer" }
-            ]
-          },
-          { id: "n8", name: "Pang Pang", title: "senior engineer" }
-        ]
-      },
-      { id: "n9", name: "Hong Miao", title: "department manager" },
-      {
-        id: "n10",
-        name: "Chun Miao",
-        title: "department manager",
-        children: [
-          { id: "n11", 
-            name: "Yue Yue", 
-            title: "senior engineer",
-            children: [
-              { id: "n12", name: "Dan Dan", title: "engineer" },
-              { id: "n13", name: "Xiang Xiang", title: "engineer" }
-            ]
-          }
-        ]
-      }
-    ]
-  };
-
-  return <OrganizationChart datasource={ds} />;
-};
-
 
 const Card = (props) => {
   const {data} = props;
@@ -75,7 +27,7 @@ const Card = (props) => {
   );
 };
 
-function LevelView({level}) {
+function LevelView({hierarchy}) {
 
   const [collapsed, setCollapsed] = useState(false);
 
@@ -83,11 +35,11 @@ function LevelView({level}) {
 
     setCollapsed(collapsed => {
       if (collapsed) {
-        data.expandLevel(level);
+        data.expandLevel(hierarchy.level);
         update && update(crypto.randomUUID());
         return false;
       } else {
-        data.collapseLevel(level)
+        data.collapseLevel(hierarchy.level);
         update && update(crypto.randomUUID());
         return true;
       }
@@ -96,29 +48,38 @@ function LevelView({level}) {
   }
 
   return (
-    <li><button onClick={onClick}>{collapsed ? `Expand ${level}` : `Collapse ${level}`}</button></li>
+    <ul className={`${hierarchy.level === 1 ? "first-level" : ""}`} key={hierarchy.level}>
+      <button onClick={onClick}>{collapsed ? `Expand ${hierarchy.level}` : `Collapse ${hierarchy.level}`}</button>
+      <li>
+        {hierarchy && hierarchy.children && hierarchy.children.map(item => <LevelView hierarchy={item} />)}
+      </li>
+    </ul>
   )
 }
 
 function LevelInitializer({noOfLevels}) {
 
-  const [levels, setLevels] = useState([])
+  const [levels, setLevels] = useState({})
   useEffect(() => {
     if (noOfLevels) {
-      const result = [];
+      let level = {};
+      let nextLevel = {};
       // Loop from 1 to n and add each number to the array
       for (let i = 1; i <= noOfLevels; i++) {
-        result.push(i);
+        if (i === 1) {
+          level = {level: i, children: []};
+        } else {
+          const newLevel = {level: i, children: []};
+          nextLevel.children.push(newLevel);
+        }
+        nextLevel = level;
       }
-      setLevels(result);
+      setLevels(level);
     }
   }, [noOfLevels]);
 
   return (
-    <ul>
-      <li></li>
-      {levels.map(level => <LevelView key={level} level={level} />)}
-    </ul>
+    <LevelView hierarchy={levels} />
   )
 
 }
