@@ -6,23 +6,34 @@ const data = initialize();
 let update;
 
 const Card = (props) => {
-  const {data} = props;
+  const {data, className = '', showTopRightCircle = false} = props;
   console.log(data);
   const conatainsOneChild = data.children ? data.children.length === 1 : false;
   const conatainsMoreThanOneChild = data.children ? data.children.length > 1 : false;
+  console.log("showTopRightCircle", showTopRightCircle);
   return (
     <ul key={data.id} className={ (!data.children || data.children.length === 0) ? " last" : conatainsOneChild ? "one-child" : ''}>
-      <div className={`box ${conatainsMoreThanOneChild ? 'has-child' : ''}`}>
+      <div className={`box ${className} ${conatainsMoreThanOneChild ? 'has-children' : conatainsOneChild ? 'has-child' : ''}`}>
+        {showTopRightCircle ? <span className="top-right-circle"></span> : <></>}
         {data.name}
         <p>This is box with width and height, you can place any ui elemnts in it.</p>
       </div>
-      {data.children && data.children.length > 0 && data.children.map((item, index) => (
+      {data.children && data.children.length > 0 && data.children.map((item, index) => {
+        let className = "card";
+        if (index === 0) {
+          className += " first";
+        }
+        if (index + 1 === data.children.length) {
+          className += " last";
+        }
+        return (
         <>
-          <li className={index + 1 === data.children.length ? "card last" : index === 0 ? "card first" : "card"} key={item.id}>
-            <Card data={item} />
+          <li className={className} key={item.id}>
+            <Card data={item} className={`box-${index}`} showTopRightCircle={data.children.length > 1} />
           </li>
         </>
-      ))}
+        )
+    })}
     </ul>
   );
 };
@@ -74,7 +85,6 @@ function LevelInitializer({noOfLevels}) {
           nextLevel.children.push(newLevel);
           nextLevel = newLevel;
         }
-        
       }
       setLevels(level);
     }
@@ -101,7 +111,7 @@ const EmployeeChart = (props) => {
         Employee Chart
         <br/> <br/>
         Max Depth : {data.getMaxDepth()}
-        <Card data={data.getRootNode()} />
+        <Card data={data.getRootNode()} className="box-nocircle" />
       </div>
     </div>
     
